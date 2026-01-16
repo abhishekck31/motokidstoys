@@ -1,10 +1,13 @@
+"use client";
+
 import { BLOG_POSTS } from '@/lib/data';
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation';
+import { motion } from 'framer-motion';
 
-export default async function BlogPostPage({ params }: { params: { id: string } }) {
-    const { id } = await params;
-    const post = BLOG_POSTS.find(p => p.id === id);
+export default function BlogPostPage() {
+    const params = useParams();
+    const post = BLOG_POSTS.find(p => p.id === params.id);
 
     if (!post) notFound();
 
@@ -90,6 +93,4 @@ export default async function BlogPostPage({ params }: { params: { id: string } 
         </article>
     );
 }
-
-import { motion } from 'framer-motion';
 

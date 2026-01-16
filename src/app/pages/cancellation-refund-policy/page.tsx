@@ -1,3 +1,7 @@
+"use client";
+
+import { motion } from 'framer-motion';
+
 export default function CancellationRefundPolicy() {
     return (
         <div className="bg-zinc-50 min-h-screen pt-40 pb-32">
@@ -59,6 +63,4 @@ export default function CancellationRefundPolicy() {
         </div>
     );
 }
-
-import { motion } from 'framer-motion';
 

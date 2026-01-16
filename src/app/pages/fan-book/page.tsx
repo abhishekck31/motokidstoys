@@ -1,3 +1,7 @@
+"use client";
+
+import { motion } from 'framer-motion';
+
 export default function FanBook() {
     return (
         <div className="bg-slate-900 min-h-screen pt-40 pb-32 text-white overflow-hidden relative">
@@ -54,6 +58,4 @@ export default function FanBook() {
         </div>
     );
 }
-
-import { motion } from 'framer-motion';
 
