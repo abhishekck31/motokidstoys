@@ -1,28 +1,52 @@
 "use client";
 
 import Link from 'next/link';
-import Image from 'next/image';
-import { COLLECTIONS } from '@/lib/data';
+import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+
+const COLLECTIONS = [
+    {
+        id: 'ride-on-cars',
+        name: 'Ride on Cars',
+        count: 98,
+        subtitle: "Explore Our Car's Collection",
+        image: null // Placeholder
+    },
+    {
+        id: 'ride-on-bikes',
+        name: 'Ride on Bikes',
+        count: 60,
+        subtitle: "Explore Our Bikes Collection",
+        image: null // Placeholder
+    },
+    {
+        id: 'kids-tractor',
+        name: 'Kids Tractor',
+        count: 5,
+        subtitle: "Explore Our Tractors Collection",
+        image: null // Placeholder
+    },
+    {
+        id: 'dirt-bikes',
+        name: 'Dirt bike',
+        count: 8,
+        subtitle: "Explore Our Dirts Collection",
+        image: null // Placeholder
+    }
+];
 
 export default function CollectionGrid() {
     return (
-        <section className="py-32 bg-zinc-50 overflow-hidden">
-            <div className="container mx-auto px-6 md:px-12">
-                <div className="flex flex-col md:flex-row items-end justify-between mb-24 gap-8">
-                    <div className="max-w-2xl">
-                        <span className="text-indigo-600 font-black uppercase tracking-[0.4em] text-[10px] mb-6 block underline decoration-indigo-600 decoration-2 underline-offset-4">Fleet Categories</span>
-                        <h2 className="text-5xl md:text-8xl font-serif font-black text-slate-900 tracking-tighter leading-[0.85] italic">
-                            Select Your <br /> Mission Type.
-                        </h2>
-                    </div>
-                    <p className="text-slate-400 font-medium text-lg max-w-xs leading-relaxed">
-                        From heavy-duty off-roaders to precision-built city replicas. Every category is a new adventure.
-                    </p>
+        <section className="py-20 bg-white">
+            <div className="container mx-auto px-4 md:px-8">
+                {/* Section Title */}
+                <div className="text-center mb-12">
+                    <h2 className="text-3xl md:text-5xl font-sans font-medium text-slate-900 tracking-tight">
+                        Shop By Collection
+                    </h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {COLLECTIONS.map((collection, i) => (
                         <motion.div
                             key={collection.id}
@@ -30,35 +54,39 @@ export default function CollectionGrid() {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.1 }}
                             viewport={{ once: true }}
+                            className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 group"
                         >
-                            <Link
-                                href={`/collections/${collection.id}`}
-                                className="group relative block aspect-[4/5] overflow-hidden bg-white border border-zinc-100 p-8 shadow-2xl shadow-slate-900/5 hover:border-indigo-600 transition-all duration-700"
-                            >
-                                <div className="relative h-full w-full flex flex-col justify-between">
-                                    <div className="flex justify-between items-start">
-                                        <div className="p-4 bg-zinc-50 rounded-2xl group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-500">
-                                            <ArrowUpRight size={24} />
+                            <Link href={`/collections/${collection.id}`} className="block h-full">
+                                {/* Image Area */}
+                                <div className="relative aspect-square bg-gray-100 flex items-center justify-center p-6 overflow-hidden">
+                                    {/* Placeholder Text for Image */}
+                                    <span className="text-gray-300 font-bold uppercase tracking-widest text-center text-xs">
+                                        [{collection.name}<br />Image]
+                                    </span>
+
+                                    {/* Overlay "Shop Now" Button */}
+                                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#ff5722] text-white text-[10px] uppercase font-bold px-4 py-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-md">
+                                        Shop Now →
+                                    </div>
+                                </div>
+
+                                {/* Content Area */}
+                                <div className="p-6 flex items-center justify-between border-t border-gray-100/50">
+                                    <div className="flex flex-col">
+                                        <div className="flex items-start gap-1">
+                                            <h3 className="text-lg font-bold text-slate-900 leading-tight">
+                                                {collection.name}
+                                            </h3>
+                                            <span className="text-[10px] font-bold text-slate-400 -mt-1">
+                                                {collection.count}
+                                            </span>
                                         </div>
-                                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-300 group-hover:text-indigo-600 transition-colors">
-                                            {collection.count}+ Items
-                                        </span>
+                                        <p className="text-[10px] text-slate-500 font-medium mt-1">
+                                            {collection.subtitle}
+                                        </p>
                                     </div>
-
-                                    <div className="relative h-2/3 w-full my-auto transition-transform duration-1000 group-hover:scale-110 group-hover:-rotate-3">
-                                        <Image
-                                            src={collection.image || "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=600"}
-                                            alt={collection.name}
-                                            fill
-                                            className="object-contain"
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <h3 className="text-3xl font-serif font-black text-slate-900 leading-none mb-2">
-                                            {collection.name}
-                                        </h3>
-                                        <div className="w-0 group-hover:w-full h-1 bg-indigo-600 transition-all duration-700" />
+                                    <div className="text-slate-900">
+                                        <ArrowRight size={18} strokeWidth={1.5} />
                                     </div>
                                 </div>
                             </Link>

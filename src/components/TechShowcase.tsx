@@ -38,20 +38,20 @@ const FEATURES = [
 
 export default function TechShowcase() {
     return (
-        <section className="py-32 bg-slate-900 overflow-hidden relative">
+        <section className="py-24 bg-slate-900 overflow-hidden relative">
             {/* Background elements */}
             <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-indigo-600/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
             <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-slate-400/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
 
             <div className="container mx-auto px-6 md:px-12 relative z-10">
-                <div className="text-center mb-24 max-w-3xl mx-auto">
-                    <span className="text-indigo-400 font-black uppercase tracking-[0.4em] text-[10px] mb-6 block underline decoration-indigo-400 decoration-2 underline-offset-4">Engineering Excellence</span>
-                    <h2 className="text-5xl md:text-8xl font-serif font-black text-white tracking-tighter leading-[0.85] italic">
+                <div className="text-center mb-20 max-w-3xl mx-auto">
+                    <span className="text-indigo-400 font-bold uppercase tracking-[0.4em] text-xs mb-6 block underline decoration-indigo-400 decoration-2 underline-offset-4">Engineering Excellence</span>
+                    <h2 className="text-4xl md:text-7xl font-sans font-black text-white tracking-tight leading-tight">
                         Built Like <br /> The Real Deal.
                     </h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
                     {FEATURES.map((feature, i) => (
                         <motion.div
                             key={feature.title}
@@ -64,7 +64,7 @@ export default function TechShowcase() {
                             <div className="w-16 h-16 bg-white/5 border border-white/10 rounded-3xl flex items-center justify-center text-indigo-400 mb-8 blur-none group-hover:bg-indigo-600 group-hover:text-white transition-all duration-500 group-hover:rotate-6">
                                 <feature.icon size={32} strokeWidth={1.5} />
                             </div>
-                            <h3 className="text-2xl font-serif font-black text-white mb-4 italic group-hover:text-indigo-400 transition-colors">
+                            <h3 className="text-xl font-bold text-white mb-4 group-hover:text-indigo-400 transition-colors">
                                 {feature.title}
                             </h3>
                             <p className="text-white/40 font-medium leading-relaxed group-hover:text-white/60 transition-colors">

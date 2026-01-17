@@ -1,19 +1,14 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
+import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import TopBar from "@/components/TopBar";
 import { CartProvider } from "@/context/CartContext";
+import { WishlistProvider } from "@/context/WishlistContext";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
 });
 
 export const metadata: Metadata = {
@@ -29,14 +24,17 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-zinc-50 text-slate-900 selection:bg-indigo-600/10`}
+        className={`${inter.variable} font-sans antialiased bg-zinc-100/50 text-slate-900 selection:bg-indigo-600/10`}
       >
-        <CartProvider>
-          <TopBar />
-          <Header />
-          <main>{children}</main>
-          <Footer />
-        </CartProvider>
+        <WishlistProvider>
+          <CartProvider>
+            <Navbar />
+            <main>{children}</main>
+            <div className="px-4 md:px-6 pb-4 md:pb-6">
+              <Footer />
+            </div>
+          </CartProvider>
+        </WishlistProvider>
       </body>
     </html>
   );

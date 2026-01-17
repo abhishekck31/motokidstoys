@@ -3,7 +3,7 @@ import { MapPin, Phone, Mail, Instagram, Facebook, Youtube, ChevronRight } from 
 
 export default function Footer() {
     return (
-        <footer className="bg-white pt-32 pb-16 border-t border-zinc-100">
+        <footer className="bg-white pt-32 pb-16 border-t border-zinc-100 rounded-[2.5rem] shadow-sm overflow-hidden">
             <div className="container mx-auto px-6 md:px-12">
                 {/* Top Section */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20 mb-32">

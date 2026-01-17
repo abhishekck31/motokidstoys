@@ -4,8 +4,9 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ShoppingBag, Check } from 'lucide-react';
+import { ShoppingBag, Check, Heart } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { useWishlist } from '@/context/WishlistContext';
 import { PRODUCTS } from '@/lib/data';
 
 interface ProductCardProps {
@@ -15,6 +16,9 @@ interface ProductCardProps {
 export default function ProductCard({ product }: ProductCardProps) {
     const [isAdded, setIsAdded] = useState(false);
     const { addToCart } = useCart();
+    const { isInWishlist, toggleWishlist } = useWishlist();
+
+    const inWishlist = isInWishlist(product.id);
 
     const handleAdd = () => {
         addToCart({
@@ -31,6 +35,12 @@ export default function ProductCard({ product }: ProductCardProps) {
         setTimeout(() => setIsAdded(false), 2000);
     };
 
+    const handleWishlist = (e: React.MouseEvent) => {
+        e.preventDefault(); // Prevent linking to product page
+        e.stopPropagation();
+        toggleWishlist(product);
+    };
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -39,8 +49,16 @@ export default function ProductCard({ product }: ProductCardProps) {
             className="group"
         >
             {/* Image Container */}
-            <div className="relative aspect-[1/1] bg-zinc-100 overflow-hidden mb-6 flex items-center justify-center p-8 group-hover:bg-zinc-200/50 transition-colors duration-700">
-                <Link href={`/product/${product.id}`} className="absolute inset-0 z-10" /> {/* Added Link for image */}
+            <div className="relative aspect-[1/1] bg-zinc-100 overflow-hidden mb-6 flex items-center justify-center p-8 group-hover:bg-zinc-200/50 transition-colors duration-700 rounded-3xl">
+                <Link href={`/product/${product.id}`} className="absolute inset-0 z-10" />
+
+                <button
+                    onClick={handleWishlist}
+                    className="absolute top-4 right-4 z-20 p-2 rounded-full bg-white/50 hover:bg-white text-slate-400 hover:text-red-500 transition-all duration-300"
+                >
+                    <Heart size={20} className={inWishlist ? "fill-red-500 text-red-500" : ""} />
+                </button>
+
                 <motion.div
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
@@ -73,7 +91,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
             {/* Info wrap in Link */}
             <Link href={`/product/${product.id}`} className="flex flex-col items-center text-center">
-                <h3 className="font-serif text-xl font-bold mb-2 tracking-tight group-hover:text-indigo-600 transition-colors duration-500">
+                <h3 className="text-xl font-bold mb-2 tracking-tight group-hover:text-indigo-600 transition-colors duration-500 text-slate-900">
                     {product.name}
                 </h3>
                 <div className="flex items-center space-x-3">
